@@ -2,6 +2,7 @@ package com.org.tmb.productservice.resource;
 
 import com.org.tmb.productservice.mapper.Mapper;
 import com.org.tmb.productservice.model.Admin;
+import com.org.tmb.productservice.model.Order;
 import com.org.tmb.productservice.model.Product;
 import com.org.tmb.productservice.model.Product;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class MyController {
 
     @GetMapping("/getProducts")
     public List<Product> getProducts() {
+        List<Product> p = userMapper.getProducts();
+        System.out.println("my products :" +p);
         return userMapper.getProducts();
     }
 
@@ -34,6 +37,7 @@ public class MyController {
 
     @RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
     public int insertProduct(@RequestBody Product product) {
+        System.out.println("hello world");
         return userMapper.insertProduct(product);
     }
 
@@ -45,6 +49,17 @@ public class MyController {
     @RequestMapping(value = "/deleteProduct", method = RequestMethod.DELETE)
     public int deleteProduct(@RequestBody Product product) {
         return userMapper.deleteProduct(product);
+    }
+
+    @GetMapping("/getAllOrders")
+    public List<Order> getAllOrders() {
+
+        return userMapper.getAllOrders();
+    }
+
+    @RequestMapping(value = "/updateOrder", method = RequestMethod.PUT)
+    public int updateOrder(@RequestBody Order order) {
+        return userMapper.updateOrder(order);
     }
 
 }
